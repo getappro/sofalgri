@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les lots de réception -->
+        <record id="seq_lot_receipt" model="ir.sequence">
+            <field name="name">Lot Receipt Sequence</field>
+            <field name="code">lot.receipt.sequence</field>
+            <field name="prefix"></field>
+            <field name="padding">2</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

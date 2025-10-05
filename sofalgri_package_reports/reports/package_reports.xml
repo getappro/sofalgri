@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Etiquettes palettes principales -->
+    <record id="action_report_package" model="ir.actions.report">
+        <field name="name">Etiquette Palette</field>
+        <field name="model">stock.quant.package</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sofalgri_package_reports.report_package_label_template</field>
+        <field name="report_file">sofalgri_package_reports.report_package_label_template</field>
+        <field name="print_report_name">'Étiquette - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_quant_package"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="sofalgri_package_reports.paperformat_a5_label"/>
+    </record>
+
+    <!-- Etiquettes palettes depuis stock.picking -->
+    <record id="action_report_picking_package" model="ir.actions.report">
+        <field name="name">Etiquette Palette</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sofalgri_package_reports.report_picking_package_template</field>
+        <field name="report_file">sofalgri_package_reports.report_picking_package_template</field>
+        <field name="print_report_name">'Étiquette - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="sofalgri_package_reports.paperformat_a5_label"/>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_picking_package_template">
+        <t t-set="docs" t-value="docs.move_line_ids.mapped('result_package_id')"/>
+        <t t-call="sofalgri_package_reports.report_package_label_template"/>
+    </template>
+</odoo>

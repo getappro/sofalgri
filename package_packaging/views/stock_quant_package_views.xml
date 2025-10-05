@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire: Ajouter le conditionnement dans la liste des quants -->
+    <record id="view_quant_package_form_packaging" model="ir.ui.view">
+        <field name="name">stock.quant.package.form.packaging</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Ajouter le champ conditionnement dans la liste des quants -->
+            <xpath expr="//field[@name='quant_ids']/list/field[@name='product_id']" position="after">
+                <field name="product_packaging_id" optional="show"/>
+                <field name="product_packaging_qty" optional="show"/>
+            </xpath>
+
+            <!-- Ajouter le champ conditionnement dans la vue kanban mobile -->
+            <xpath expr="//field[@name='quant_ids']/kanban//field[@name='lot_id']" position="after">
+                <field name="product_packaging_id"/>
+                <field name="product_packaging_qty"/>
+            </xpath>
+
+            <!-- Afficher le conditionnement dans le template kanban -->
+            <xpath expr="//field[@name='quant_ids']/kanban//templates/t[@t-name='card']/div[@class='d-flex']" position="before">
+                <div t-if="record.product_packaging_id.value">
+                    <i class="fa fa-cube"/> <field name="product_packaging_qty"/> x <field name="product_packaging_id"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
