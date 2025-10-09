@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ======================================================= -->
+    <!-- 1. HÉRITAGE DU RAPPORT DEVIS / BON DE COMMANDE          -->
+    <!-- ======================================================= -->
+    <template id="report_saleorder_document_inherit_packaging" inherit_id="sale.report_saleorder_document">
+        <!-- On cible la table des lignes de commande pour ajouter nos colonnes -->
+        <xpath expr="//table/thead/tr/th[@name='th_description']" position="after">
+            <!-- Ajout de l'en-tête pour le Prix par Colis -->
+            <th name="th_price_unit_package" class="text-right">Prix Unit. / Colis</th>
+            <!-- Ajout de l'en-tête pour le Conditionnement -->
+            <th name="th_packaging" class="text-left">Conditionnement</th>
+        </xpath>
+
+        <xpath expr="//table/tbody/t/tr/t/td[@name='td_name']" position="after">
+            <!-- Ajout de la cellule pour le Prix par Colis -->
+            <td name="td_price_unit_package" class="text-right">
+                <!-- On affiche le prix uniquement si un packaging est sélectionné -->
+                <span t-if="line.product_packaging_id"
+                      t-field="line.price_unit_package"
+                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+            </td>
+            <!-- Ajout de la cellule pour le Conditionnement -->
+            <td name="td_packaging">
+                <!-- On affiche le nom du packaging et la quantité en packaging -->
+                <span t-if="line.product_packaging_id">
+                    <span t-field="line.product_packaging_id.name"/>
+                    (<span t-field="line.product_packaging_qty"/>)
+                </span>
+            </td>
+        </xpath>
+    </template>
+
+
+    <!-- ======================================================= -->
+    <!-- 2. HÉRITAGE DU RAPPORT DE FACTURE                       -->
+    <!-- ======================================================= -->
+    <template id="report_invoice_document_inherit_packaging" inherit_id="account.report_invoice_document">
+        <!-- On cible la table des lignes de facture pour ajouter nos colonnes -->
+        <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_description']" position="after">
+            <!-- Ajout de l'en-tête pour le Prix par Colis -->
+            <th name="th_price_unit_package" class="text-right"><span>Prix Unit. / Colis</span></th>
+            <!-- Ajout de l'en-tête pour le Conditionnement -->
+            <th name="th_packaging" class="text-left"><span>Conditionnement</span></th>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']/tbody/t/tr/t/td[@name='td_quantity']" position="before">
+            <!-- Ajout de la cellule pour le Prix par Colis -->
+            <td name="td_price_unit_package" class="text-right">
+                <!-- On affiche le prix uniquement si un packaging est sélectionné -->
+                <span t-if="line.product_packaging_id"
+                      t-esc="line.price_unit_package"
+                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+            </td>
+            <!-- Ajout de la cellule pour le Conditionnement -->
+            <td name="td_packaging">
+                 <!-- On affiche le nom du packaging et la quantité en packaging -->
+                <span t-if="line.product_packaging_id">
+                    <span t-field="line.product_packaging_id.name"/>
+                    (<span t-field="line.product_packaging_qty"/>)
+                </span>
+            </td>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue Formulaire du Bon de Commande -->
+    <!-- On ajoute le prix par colis à côté du prix unitaire -->
+    <record id="view_order_form_inherit_packaging_price" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.packaging.price</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_packaging_qty']" position="before">
+                <field name="price_unit_package" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue Formulaire de la Facture -->
+    <!-- On ajoute les 3 champs relatifs au packaging -->
+    <record id="view_move_form_inherit_packaging_price" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.packaging.price</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- On cible la colonne 'quantity' et on ajoute nos champs avant -->
+            <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="before">
+                 <field name="price_unit_package" optional="show"/>
+                 <field name="product_packaging_qty" optional="show"/>
+                 <field name="product_packaging_id" optional="show"/>
+             </xpath>
+        </field>
+    </record>
+</odoo>
