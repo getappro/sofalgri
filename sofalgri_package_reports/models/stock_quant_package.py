@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
 
 class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
+    _description = 'Add fields for report'
 
     # Ajout du nouveau champ pour le poids à vide (tare)
-    tare_weight = fields.Float(string='Poids à vide (Tare)')
+    tare_weight = fields.Float(string='Poids à vide (Tare)', default='96.5')
 
     # Le champ shipping_weight est déjà existant, nous allons surcharger son calcul
     # Si le champ n'existait pas, vous le définiriez comme suit :

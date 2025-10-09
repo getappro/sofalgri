@@ -7,9 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='type']" position="after">
                 <field name="product_variety"/>
-                <field name="product_category"/>
-                <field name="type_emballage"/>
-                <field name="qty_emballage"/>
+                <field name="product_classify"/>
             </xpath>
             <xpath expr="//group[@name='group_lots_and_weight']" position="inside">
                 <field name="global_gap"/>

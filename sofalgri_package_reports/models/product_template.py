@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
 class ProductTemplate(models.Model):
@@ -5,9 +6,8 @@ class ProductTemplate(models.Model):
     _description = 'Add fields package reports'
 
     product_variety = fields.Char(string="Variété")
-    product_category = fields.Char(string="Catégorie")
-    type_emballage = fields.Char(string="Type colis")
-    qty_emballage = fields.Integer(string="Quantité par colis")
+    product_classify = fields.Selection([('1', '1'), ('2', '2')],
+                              string='Classe Produit', default='1')
     global_gap = fields.Char(string="Global Gap Number")
 
 class ProductProduct(models.Model):
