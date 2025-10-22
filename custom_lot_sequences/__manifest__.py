@@ -5,7 +5,7 @@
     'summary': 'Generate custom lot numbers for receipts and manufacturing orders.',
     'author': 'WAHBI ACHRAF',
     'website': 'https://www.getap.pro',
-    'depends': ['stock'],
+    'depends': ['stock','mrp'],
     'data': [
         'data/ir_sequence_data.xml',
     ],
