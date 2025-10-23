@@ -11,7 +11,7 @@
     """,
     'author': 'GetapPRO',
     'website': 'https://www.getap.pro',
-    'depends': ['base','stock', 'purchase', 'product'],
+    'depends': ['base','stock', 'purchase', 'product','picking_custom_addons'],
     'data': [
         'data/report_paperformat.xml',
         'reports/package_reports.xml',
