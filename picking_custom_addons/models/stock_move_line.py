@@ -8,7 +8,7 @@ class StockMoveLine(models.Model):
 
     # --- Champs existants pour le calcul final ---
     net_weight = fields.Float(
-        string="Poids Net",
+        string="Poids Brut",
         digits='Stock Weight',
         help="Poids brut total mesuré sur la balance."
     )
@@ -75,3 +75,34 @@ class StockMoveLine(models.Model):
             self.quantity = self.net_weight - self.tare
         else:
             self.quantity = 0.0
+
+    def _action_done(self):
+        """
+        On hérite de la méthode pour copier les informations de la ligne (caisses, poids)
+        vers le colis de destination.
+        Les poids sont accumulés pour gérer plusieurs ajouts au même colis.
+        """
+        res = super(StockMoveLine, self)._action_done()
+
+        for line in self:
+            # On vérifie si un colis de destination est défini
+            if line.result_package_id:
+                package = line.result_package_id
+
+                # Préparation des valeurs à écrire
+                vals_to_write = {
+                    # On ACCUMULE le poids net du produit (net_weight)
+                    'shipping_weight': package.shipping_weight + line.net_weight,
+                    # On ACCUMULE le poids de la tare
+                    'tare': package.tare + line.tare,
+                    'packaging_datetime': fields.Datetime.now(),
+                }
+
+                # Pour la quantité de caisses, la dernière opération "gagne", ce qui est logique
+                if line.crate_quantity > 0:
+                    vals_to_write['crate_quantity'] = line.crate_quantity
+
+                # On écrit toutes les valeurs en une seule fois pour la performance
+                package.write(vals_to_write)
+
+        return res

@@ -18,7 +18,6 @@
         'reports/package_report_templates.xml',
         'reports/picking_package_report_template.xml',
         'views/product_template_views.xml',
-        'views/stock_quant_package_views.xml',
         'views/res_company_views.xml'
     ],
     'installable': True,

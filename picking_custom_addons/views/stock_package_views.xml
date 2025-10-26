@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_quant_package_form_inherit_crates" model="ir.ui.view">
+        <field name="name">stock.quant.package.form.inherit.crates</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_date']" position="after">
+                <field name="tare"/>
+            </xpath>
+            <xpath expr="//field[@name='pack_date']" position="replace">
+                <field name="packaging_datetime"/>
+            </xpath>
+
+            <xpath expr="//field[@name='quant_ids']/list/field[@name='lot_id']" position="after">
+                <field name="crate_quantity"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

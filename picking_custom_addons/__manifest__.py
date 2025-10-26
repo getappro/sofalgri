@@ -11,6 +11,8 @@
     'data': [
         'views/stock_move_line_views.xml',
         'views/stock_picking_views.xml',
+        'views/stock_quant_views.xml',
+        'views/stock_package_views.xml',
     ],
     'installable': True,
     'application': False,
