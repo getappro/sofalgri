@@ -2,7 +2,7 @@
 <odoo>
     <!-- Template pour rapport de réception -->
     <template id="report_package_reception_template">
-         <t t-call="web.html_container">
+          <t t-call="web.html_container">
             <t t-set="o" t-value="doc"/>
             <!-- Filters out package's quants with no quantity. -->
             <t t-set="package_quants" t-value="o.quant_ids.filtered('quantity')"/>
@@ -21,6 +21,7 @@
                     <t t-foreach="package_quants.product_id" t-as="product">
                         <t t-set="product_quants" t-value="package_quants.filtered(lambda q: q.product_id.id == product.id)"/>
                         <t t-set="product_qty" t-value="sum(product_quants.mapped('quantity'))"/>
+                        <t t-set="product_crate_qty" t-value="sum(product_quants.mapped('crate_quantity'))"/>
                         <!-- Display each individual LN/SN if there is less than 50. -->
                         <t t-set="display_content_details" t-value="0 &lt; len(product_quants.lot_id) &lt; 50"/>
                         <t t-set="aggregate_barcodes" t-value="product_quants.get_aggregate_barcodes()"/>
@@ -33,6 +34,12 @@
                                     </tr>
                                 </t>
                             </t>
+                            <tr>
+                                <td style="width:30%;">Nbre Colis</td>
+                                <td>
+                                    <span t-esc="product_crate_qty"></span>
+                                </td>
+                            </tr>
                             <tr>
                                 <td style="width: 30%;">Produit</td>
                                 <td><span t-field="product.display_name"/></td>
@@ -51,9 +58,9 @@
                             <tr>
                                 <td style="width: 30%;">Tare</td>
                                 <td>
-                                    <span t-field="o.tare_weight">3.00</span>
+                                    <span t-field="o.tare">3.00</span>
                                     <span t-field="quant.product_id.uom_id.name" groups="uom.group_uom">Units</span>
-                                </td>>
+                                </td>&gt;
                             </tr>
                             <tr>
                                 <td>Poids Net</td>
@@ -92,7 +99,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span t-field="o.pack_date"/>
+                                    <span t-field="o.packaging_datetime"/>
                                 </td>
                                 <td>
                                     <div t-if="o.package_type_id" class="o_packaging_type col">
