@@ -75,9 +75,9 @@ class StockMoveLine(models.Model):
         # On ne lance le calcul que si l'utilisateur a saisi un poids net.
         if self.net_weight > 0:
             if self.net_weight > self.tare:
-                self.qty_done = self.net_weight - self.tare
+                self.quantity = self.net_weight - self.tare
             else:
-                self.qty_done = 0.0
+                self.quantity = 0.0
         # Si self.net_weight est 0, on ne met pas de "else".
         # En ne faisant rien, on laisse la valeur par défaut d'Odoo (la quantité demandée)
         # ou la valeur saisie manuellement par l'utilisateur.
