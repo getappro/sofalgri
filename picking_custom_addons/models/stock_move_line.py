@@ -25,7 +25,7 @@ class StockMoveLine(models.Model):
     pallet_weight = fields.Float(
         string="Poids Palette",
         digits='Stock Weight',
-        default=12.0,
+        default=24.0,
         help="Poids de la palette vide."
     )
     crate_product_id = fields.Many2one(
