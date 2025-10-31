@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Rapports de Colis SOFALGARI',
-    'version': '18.0.1.1.0',
+    'version': '18.0.8.4.0',
     'category': 'Inventory/Inventory',
     'summary': 'Rapports personnalisés pour les colis de réception et remise en stock',
     'description': """
@@ -18,7 +18,9 @@
         'reports/package_report_templates.xml',
         'reports/picking_package_report_template.xml',
         'views/product_template_views.xml',
-        'views/res_company_views.xml'
+        'views/res_company_views.xml',
+        'views/stock_quant_package_views.xml',
+        'views/stock_quant_tree_views.xml',
     ],
     'installable': True,
     'auto_install': False,

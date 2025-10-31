@@ -215,7 +215,7 @@
                                         <span t-field="product.product_variety"/>
                                     </td>
                                     <td>
-                                        <span t-field="product.product_category"/>
+                                        <span t-field="product.product_classify"/>
                                     </td>
                                     <td>
                                         <span t-field="product.calibre"/>
