@@ -244,8 +244,8 @@
                                 <td style="width:30%;">
                                     <span>Poids Net Total:</span>
                                 </td>
-                                <td colspan="5">
-                                    <span t-field="o.shipping_weight"/> <span t-field="o.weight_uom_name"/>
+                                <td colspan="5" style="font-size:18px; font-weight:bold;">
+                                    <span t-field="quant.quantity" class="mt-2"/> <span t-field="quant.product_uom_id.name" class="mt-2"/>
                                 </td>
                             </tr>
                             <tr>
@@ -271,20 +271,20 @@
                                 <td colspan="3">
                                     <div class="text-center">
                                         <span> Calibres:</span><br/>
-                                        <span t-field="first_product.calibre"/>
+                                        <span style="font-size: 42px; fonct-weight:800;" t-field="first_product.calibre"/>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="text-center">
                                         <span> N° de Palette:</span><br/>
-                                        <span t-field="o.name"/>
+                                        <span style="font-size:42px; fonct-weight:800;" t-field="o.name"/>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="5">
                                     <div>
-                                        <span>Produits certifiés Global Gap: </span>
+                                        <span>Produits certifiés Global Gap: <span t-field="o.company_id.number_ggn"/></span>
                                     </div>
                                 </td>
                                 <td>
