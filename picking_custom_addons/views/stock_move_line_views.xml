@@ -18,6 +18,7 @@
                 <field name="pallet_weight"/>
 
                 <field name="tare" readonly="1"/>
+                <button name="action_print_package_report" type="object" icon="fa-print" string="Imprimer l'étiquette"/>
             </xpath>
             <xpath expr="//field[@name='owner_id']" position="attributes">
                 <attribute name="invisible">1</attribute>

@@ -32,6 +32,7 @@ class StockMoveLine(models.Model):
         'product.product',
         string='Colis',
         domain="[('categ_id.name', '=', 'Colis')]",  # <-- DOMAIN AJOUTÉ ICI
+        options="{'no_create': True, 'no_create_edit':True}",
         help="Sélectionnez le type de caisse utilisé (doit être un article avec un poids défini)."
     )
 
@@ -84,7 +85,7 @@ class StockMoveLine(models.Model):
         return
 
 
-def _action_done(self):
+    def _action_done(self):
         """
         On hérite de la méthode pour copier les informations de la ligne (caisses, poids)
         vers le colis de destination.
@@ -114,3 +115,6 @@ def _action_done(self):
                 package.write(vals_to_write)
 
         return res
+
+    def action_print_package_report(self):
+       return self.env.ref('picking_custom_addons.action_report_package').report_action(self)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_package" model="ir.actions.report">
+            <field name="name">Étiquette de colis</field>
+            <field name="model">stock.move.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">picking_custom_addons.report_package_template</field>
+            <field name="report_file">picking_custom_addons.report_package_template</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="sofalgri_package_reports.paperformat_a5_label"/>
+        </record>
+    </data>
+</odoo>

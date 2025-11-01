@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Picking Custom Addons',
-    'version': '18.0.1.0.0',
+    'version': '18.0.4.3.0',
     'category': 'Inventory',
     'summary': 'Module personalisé pour Sofalgri',
     'description': """
@@ -9,6 +9,8 @@
     """,
     'depends': ['stock', 'product'],
     'data': [
+        'reports/report_actions.xml',
+        'reports/package_report_templates.xml',
         'views/stock_move_line_views.xml',
         'views/stock_picking_views.xml',
         'views/stock_quant_views.xml',
