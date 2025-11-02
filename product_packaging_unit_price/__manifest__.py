@@ -1,6 +1,6 @@
 {
     'name': "Product Unit Price py Packaging",
-    'version': '18.0.2.3.0',
+    'version': '18.0.4.3.0',
     'summary': """
         Manage sales and invoices with a unit price per packaging.
     """,
@@ -16,6 +16,7 @@
     'category': 'Sales/Sales',
     'license': 'LGPL-3',
     'depends': [
+        'base',
         'stock',
         'sale_management',
         'account'
@@ -23,7 +24,8 @@
     'data': [
         'reports/report_templates.xml',
         'views/product_packaging_views.xml',
-        'views/sale_account_views.xml'
+        'views/sale_account_views.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
     'application': True,
