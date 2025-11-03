@@ -245,8 +245,11 @@
                                     <span>Poids Net Total:</span>
                                 </td>
                                 <td colspan="5" style="font-size:18px; font-weight:bold;">
-                                    <span t-field="quant.quantity" class="mt-2"/> <span t-field="quant.product_uom_id.name" class="mt-2"/>
-                                </td>
+                <!-- MODIFICATION : Calcul de la somme des quantités -->
+                <span t-esc="sum(package_quants.mapped('quantity'))" class="mt-2"/>
+                <!-- MODIFICATION : Affichage de l'unité de mesure du premier produit -->
+                <span t-if="package_quants" t-field="package_quants[0].product_uom_id.name" class="mt-2"/>
+            </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
