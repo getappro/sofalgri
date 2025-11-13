@@ -31,6 +31,12 @@ class ProductPackaging(models.Model):
         store=True,
     )
 
+    # Un champs supplémentaire pour le rapport de facture
+    description_sale = fields.Char(
+        string='Sale Description',
+        help = 'Mettez la description qui sera affiché sur la facture.'
+    )
+
     @api.depends('qty', 'product_id.list_price', 'product_id.standard_price')
     def _compute_packaging_prices(self):
         """

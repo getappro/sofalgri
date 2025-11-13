@@ -1,6 +1,27 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    delivery_truck_number = fields.Char(string='Matricule', help='Mettez le matricule de Camion de Livraison')
+
+    def _prepare_invoice(self):
+        """
+        Surcharge de la méthode standard pour y ajouter notre champ personnalisé.
+        """
+        # 1. Appeler la méthode originale pour récupérer toutes les valeurs standards
+        invoice_vals = super(SaleOrder, self)._prepare_invoice()
+
+        # 2. Ajouter notre champ personnalisé au dictionnaire de valeurs
+        #    La clé du dictionnaire doit correspondre au nom technique du champ
+        #    dans le modèle account.move.
+        if self.delivery_truck_number:
+            invoice_vals['delivery_truck_number'] = self.delivery_truck_number
+
+        # 3. Retourner le dictionnaire modifié
+        return invoice_vals
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'

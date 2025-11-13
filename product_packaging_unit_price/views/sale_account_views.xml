@@ -13,6 +13,18 @@
         </field>
     </record>
 
+    <!-- On Ajoute le Matricule du camion de livraison -->
+    <record id="view_order_form_inherit_truck_number" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.truck.number</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='incoterm_location']" position="after">
+                <field name="delivery_truck_number"/>
+            </xpath>
+        </field>
+    </record>
+
     <!-- Vue Formulaire de la Facture -->
     <!-- On ajoute les 3 champs relatifs au packaging -->
     <record id="view_move_form_inherit_packaging_price" model="ir.ui.view">
@@ -26,6 +38,9 @@
                  <field name="product_packaging_qty" optional="show"/>
                  <field name="product_packaging_id" optional="show"/>
              </xpath>
+            <xpath expr="//field[@name='fiscal_position_id']" position="after">
+                <field name="delivery_truck_number"/>
+            </xpath>
         </field>
     </record>
 </odoo>

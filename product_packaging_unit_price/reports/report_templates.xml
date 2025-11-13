@@ -4,153 +4,150 @@
     <!--     REMPLACEMENT COMPLET DU TABLEAU DE LA FACTURE       -->
     <!-- ======================================================= -->
     <template id="report_invoice_document_inherit_packaging_replace" inherit_id="account.report_invoice_document">
+        <!-- ======================================================= -->
+        <!-- 1. SUPPRESSION DES CHAMPS DE L'EN-TÊTE (INCHANGÉ)      -->
+        <!-- ======================================================= -->
+        <xpath expr="//div[@name='due_date']" position="replace"/>
+        <xpath expr="//div[@name='customer_code']" position="replace"/>
+        <xpath expr="//div[@name='reference']" position="replace"/>
+        <xpath expr="//div[@name='origin']" position="replace"/>
+        <xpath expr="//div[@name='incoterm_id']" position="replace">
+            <div class="col" t-if="o.invoice_incoterm_id" name="incoterm_id">
+                <strong>Incoterm</strong>
+                <div t-if="o.incoterm_location">
+                    <span t-field="o.invoice_incoterm_id.code"/>
+                    <span t-field="o.incoterm_location"/>
+                </div>
+                <div t-else="" t-field="o.invoice_incoterm_id.code" class="m-0"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@name='incoterm_id']" position="after">
+            <div class="col" t-if="o.delivery_truck_number" name="delivery_truck_number">
+                <strong>Matricule</strong>
+                <div t-field="o.delivery_truck_number" class="m-0"/>
+            </div>
+        </xpath>
 
-          <!-- On cible le tableau des lignes de facture et on le remplace entièrement -->
+        <!-- ======================================================= -->
+        <!-- 2. REMPLACEMENT DU TABLEAU DE LA FACTURE (INCHANGÉ)     -->
+        <!-- ======================================================= -->
         <xpath expr="//table[@name='invoice_line_table']" position="replace">
-
-            <!-- Voici votre NOUVEAU tableau. Vous pouvez changer l'ordre,
-                 supprimer ou ajouter des colonnes comme vous le souhaitez. -->
+            <!-- Tout votre code pour le nouveau tableau va ici. -->
+            <!-- Je le remets pour que le code soit complet. -->
             <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
             <t t-set="display_taxe" t-value="any(line.tax_ids for line in o.invoice_line_ids)"/>
             <t t-set="display_calibre" t-value="any(line.product_id.calibre for line in o.invoice_line_ids)"/>
             <div class="oe_structure"/>
             <t t-set="has_long_desc" t-value="any(line.name and line.name.count('\n') &gt; 30 for line in o.invoice_line_ids if line.name)"/>
-            <table class="o_has_total_table table o_main_table table-borderless mb-0" name="invoice_line_table">
-                <thead t-attf-style="#{has_long_desc and 'display: table-row-group;' or ''}">
-                    <tr>
+            <table class="o_has_total_table table o_main_table table-borderless mb-0" name="invoice_line_table"> <!-- table-borderless retiré pour voir les lignes -->
+                <thead>
+                    <tr style="font-size:14px;">
                         <th name="th_description" class="text-start"><span>Designation</span></th>
                         <th name="th_calibre" t-if="display_calibre" class="text-center"><span>Calibre</span></th>
-                        <th name="th_nb_package" t-if="display_calibre" class="text-center"><span>Nbre Colis</span></th>
-                        <th name="th_package" t-if="display_calibre" class="text-start"><span>Emballage</span></th>
+                        <th name="th_nb_package" class="text-center"><span>Nbre Colis</span></th>
+                        <th name="th_package" class="text-start"><span>Emballage</span></th>
                         <th name="th_quantity" class="text-center"><span>Poids Net</span></th>
-                        <th name="th_priceunit" t-attf-class="text-center text-nowrap {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Prix Unitaire</span></th>
-                        <th name="th_discount" t-if="display_discount" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                            <span>Disc.%</span>
-                        </th>
-                        <th name="th_taxes" t-if="display_taxe" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
-                        <th name="th_subtotal" class="text-end">
-                            <span>Montant</span>
-                        </th>
+                        <th name="th_priceunit" class="text-center text-nowrap"><span>Prix Unitaire</span></th>
+                        <th name="th_subtotal" class="text-end"><span>Montant</span></th>
                     </tr>
-                            </thead>
-                            <tbody class="invoice_tbody">
-                                <t t-set="current_subtotal" t-value="0"/>
-                                <t t-set="current_total" t-value="0"/>
-                                <t t-set="current_total_qty" t-value="0"/>
-                                <t t-set="current_total_package" t-value="0"/>
-                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <t t-set="current_subtotal" t-value="0"/>
+                    <t t-set="current_total" t-value="0"/>
+                    <t t-set="current_total_qty" t-value="0"/>
+                    <t t-set="current_total_package" t-value="0"/>
+                    <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
 
-                                <t t-foreach="lines" t-as="line">
-                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
-                                    <t t-set="current_total" t-value="current_total + line.price_total"/>
-                                    <t t-set="current_total_qty" t-value="current_total_qty + line.quantity"/>
-                                    <t t-set="current_total_package" t-value="current_total_package + line.product_packaging_qty"/>
-
-                                    <tr t-att-class="'fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
-                                        <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
-                                            <td name="account_invoice_line_name">
-                                                <span t-if="line.product_id.description_sale" t-field="line.product_id.description_sale" t-options="{'widget': 'text'}">Bacon Burger</span>
-                                            </td>
-                                            <td name="td_calibre" t-if="line.product_id.calibre" class="text-center">
-                                                CAL: <span t-field="line.product_id.calibre">20</span>
-                                            </td>
-                                            <td name="td_qty_package" t-if="line.product_packaging_qty" class="text-center">
-                                                <span t-field="line.product_packaging_qty"/>
-                                            </td>
-                                            <td name="td_package" t-if="line.product_packaging_id" class="text-start">
-                                                <span t-field="line.product_packaging_id.name"/>
-                                            </td>
-
-                                            <td name="td_quantity" class="o_td_quantity text-center">
-                                                <span t-field="line.quantity" class="text-nowrap">3.00</span>
-                                                <span t-field="line.product_uom_id" groups="uom.group_uom">units</span>
-                                            </td>
-                                            <td name="td_price_unit" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                                <t t-if="line.product_packaging_id">
-                                                    <span class="text-nowrap" t-field="line.price_unit_package">9.00</span>
-                                                </t>
-                                                <t t-else="">
-                                                    <span class="text-nowrap" t-field="line.price_unit">9.00</span>
-                                                </t>
-                                            </td>
-                                            <td name="td_discount" t-if="display_discount" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                                <span class="text-nowrap" t-field="line.discount">0</span>
-                                            </td>
-                                            <t t-set="taxes" t-value="', '.join([(tax.invoice_label or tax.name) for tax in line.tax_ids])"/>
-                                            <td name="td_taxes" t-if="display_taxe" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }} {{ 'text-nowrap' if len(taxes) &lt; 10 else '' }}">
-                                                <span t-out="taxes" id="line_tax_ids">Tax 15%</span>
-                                            </td>
-                                            <td name="td_subtotal" class="text-end o_price_total">
-                                                <span class="text-nowrap" t-field="line.price_subtotal">27.00</span>
-                                            </td>
-                                        </t>
-                                        <t t-elif="line.display_type == 'line_section'">
-                                            <td colspan="99">
-                                                <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">A section title</span>
-                                            </td>
-                                            <t t-set="current_section" t-value="line"/>
-                                            <t t-set="current_subtotal" t-value="0"/>
-                                        </t>
-                                        <t t-elif="line.display_type == 'line_note'">
-                                            <td colspan="99">
-                                                <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>
-                                            </td>
-                                        </t>
-                                    </tr>
-
-                                </t>
-                                <tr>
-                                        <td colspan="2"/>
-                                        <td name="td_total_package" class="text-center">
-                                            <strong><span t-esc="int(current_total_package)"/></strong>
-                                        </td>
-                                        <td/>
-                                        <td name="td_total_qty" class="text-center">
-                                            <strong><span t-esc="current_total_qty"/></strong>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
-
-
+                    <t t-foreach="lines" t-as="line">
+                        <t t-if="line.display_type == 'product'">
+                             <t t-set="current_total_qty" t-value="current_total_qty + line.quantity"/>
+                             <t t-set="current_total_package" t-value="current_total_package + line.product_packaging_qty"/>
+                             <tr style="font-size:12px;">
+                                <td name="account_invoice_line_name"><span t-field="line.product_id.description_sale"/></td>
+                                <td class="text-center"><span t-field="line.product_id.calibre"/></td>
+                                <td class="text-center"><span t-field="line.product_packaging_qty" t-options='{"widget": "float", "precision": 0}'/></td>
+                                <td class="text-start"><span t-field="line.product_packaging_id.description_sale"/></td>
+                                <td class="text-center">
+                                    <span t-field="line.quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-nowrap" t-field="line.price_unit_package" t-options='{"widget": "float", "precision": 4}'/>
+                                </td>
+                                <td class="text-end">
+                                    <span class="text-nowrap" t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                    <!-- Ligne pour les totaux de colonnes -->
+                    <tr style="border-top: 1px solid black; font-weight: bold;">
+                        <td colspan="2"/>
+                        <td class="text-center">
+                            <span t-esc="int(current_total_package)" t-options='{"widget": "float", "precision": 0}'/>
+                        </td>
+                        <td/>
+                        <td class="text-center">
+                            <span t-esc="current_total_qty" t-options='{"widget": "float", "precision": 2}'/>
+                        </td>
+                        <td colspan="2"/>
+                    </tr>
+                </tbody>
+            </table>
         </xpath>
-        <xpath expr="//div/p[@name='payment_communication']" position="replace">
-            <!-- D'abord, on met en place la logique pour trouver le bon picking -->
-            <!-- 1. On récupère toutes les commandes liées à cette facture -->
-            <t t-set="sale_orders" t-value="o.invoice_line_ids.sale_line_ids.order_id"/>
-            <!-- 2. On récupère tous les pickings "faits" liés à ces commandes -->
-            <t t-set="done_pickings" t-value="sale_orders.picking_ids.filtered(lambda p: p.state == 'done')"/>
-            <!-- 3. On sélectionne le premier picking "fait" trouvé (le plus courant) -->
-            <t t-set="picking" t-value="done_pickings and done_pickings[0]"/>
 
-            <!-- Ensuite, on affiche les informations si on a bien trouvé un picking -->
 
-             <div class="mb-2" t-if="o.move_type in ('out_invoice', 'in_refund') and o.payment_reference">
-                 <div name="shipping_information" class="mb-4">
-                     <div name="brut_Weight">Poids Brut Total: <span t-field="picking.weight"/></div>
-                     <div name="net_Weight">Poids Net Total: <span t-esc="current_total_qty"/></div>
-                     <div name="brut_Weight">
-                         <t t-set="total_palettes" t-value="(int(current_total_package) + 219) // 220"/>
-                         Nombre de pallettes total: <span t-esc="int(total_palettes)"/></div>
-                     <div name="brut_Weight">
-                         Nombre de colis total: <span t-esc="int(current_total_package)"/>
+        <!-- ======================================================= -->
+        <!-- 3. REMPLACER TOUT LE PIED DE PAGE POUR RECRÉER LA MISE EN PAGE -->
+        <!-- ======================================================= -->
+        <xpath expr="//div[hasclass('overflow-hidden')]" position="replace">
+            <div class="row" name="custom_footer" style="margin-top: 30px;">
+
+                <!-- COLONNE DE GAUCHE : Vos informations personnalisées -->
+                <div class="col-7">
+                    <t t-set="sale_orders" t-value="o.invoice_line_ids.sale_line_ids.order_id"/>
+                    <t t-set="done_pickings" t-value="sale_orders.picking_ids.filtered(lambda p: p.state == 'done')"/>
+                    <t t-set="picking" t-value="done_pickings and done_pickings[0]"/>
+
+                    <div name="shipping_information" class="mb-4">
+                        Poids Brut Total: <strong><span t-field="picking.weight"/></strong><br/>
+                        Poids Net Total: <strong><span t-esc="current_total_qty" t-options='{"widget": "float", "precision": 2}'/></strong><br/>
+                        Nombre de pallettes total: <strong><span t-esc="int((current_total_package + 219) // 220) if current_total_package > 0 else 0"/></strong><br/>
+                        Nombre de colis total: <strong><span t-esc="int(current_total_package)" t-options='{"widget": "float", "precision": 0}'/></strong>
                     </div>
-                 </div>
-                 <div name="shipping_address">
+                    <div name="payment_information">
+                        Réglement à l'ordre de : <strong><span t-field="o.company_id.name"/></strong><br/>
+                        Modalité de paiement : <strong><span t-field="o.preferred_payment_method_line_id.name"/></strong><br/>
+                        <p style="margin-top: 8px;">Coordonnées bancaire :</p>
+                        <div name="bank">
+                            <t t-if="o.partner_bank_id">
+                                RIB: <strong><span t-field="o.partner_bank_id.acc_number"/></strong><br/>
+                                BIC - Code SWIFT: <strong><span t-field="o.partner_bank_id.code_swift"/></strong><br/>
+                                IBAN: <strong><span t-field="o.partner_bank_id.iban"/></strong>
+                            </t>
+                        </div>
+                    </div>
+                </div>
 
-                 </div>
-                 <div name="payment_information" class="mb-4">
-                     <div name="payment">Réglement à l'ordre de : <strong><span t-field="o.company_id.name"/></strong></div>
-                     <div name="payment_term">Modalité de paiement : <strong><span t-field="o.preferred_payment_method_line_id.name"/></strong></div>
-                     <p>Coordonnées bancaire :</p>
-                     <div name="bank" style="padding: 0 20px;">
-                         RIB: <strong><span t-field="o.partner_bank_id.acc_number"/></strong><br/>
-                         BIC - Code SWIFT: <strong><span t-field="o.partner_bank_id.code_swift"/></strong><br/>
-                         IBAN: <strong><span t-field="o.partner_bank_id.iban"/></strong>
-                     </div>
-                 </div>
-             </div>
-
+                <!-- COLONNE DE DROITE : Le bloc des totaux (repris du code standard Odoo) -->
+                <div class="col-5">
+                    <div id="total">
+                        <table class="o_total_table table table-borderless avoid-page-break-inside">
+                            <!-- Utilisation du template standard d'Odoo pour afficher les totaux -->
+                            <t t-call="account.document_tax_totals">
+                                <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                <!-- LA LIGNE MANQUANTE EST ICI -->
+                                <t t-set="currency" t-value="o.currency_id"/>
+                            </t>
+                        </table>
+                    </div>
+                    <p t-if="o.company_id.display_invoice_amount_total_words" class="text-end">
+                        <strong>Montant total en toutes lettres :</strong><br/>
+                        <span t-field="o.amount_total_words"/>
+                    </p>
+                </div>
+            </div>
         </xpath>
+
     </template>
 </odoo>
