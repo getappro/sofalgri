@@ -119,7 +119,7 @@
                             J'utilise un exemple basé sur le nom "PLASTIQUE".
                             Vous DEVEZ adapter cette condition à votre cas réel.
                         -->
-                        <t t-if="line.product_packaging_id and 'PLASTIQUE' in line.product_packaging_id.description_sale.upper()">
+                        <t t-if="line.product_packaging_id and 'PLASTIQUE' in line.product_packaging_id.name.upper()">
                             <t t-set="total_packages_100" t-value="total_packages_100 + line.product_packaging_qty"/>
                         </t>
                         <t t-else="">
