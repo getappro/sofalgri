@@ -31,6 +31,7 @@ class SaleOrderLine(models.Model):
         digits='Product Price',
     )
 
+
     # ... (vos méthodes @api.onchange restent inchangées, elles sont correctes) ...
     @api.onchange('product_packaging_id')
     def _onchange_product_packaging_id(self):
