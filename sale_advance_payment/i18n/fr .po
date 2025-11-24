@@ -1,0 +1,264 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_advance_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-24 22:45+0000\n"
+"PO-Revision-Date: 2025-11-24 23:49+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. module: sale_advance_payment
+#: model:ir.model,name:sale_advance_payment.model_account_voucher_wizard_sale
+msgid "Account Voucher Wizard Sale"
+msgstr "Vente de l'assistant de bons de compte"
+
+#. module: sale_advance_payment
+#: model:ir.actions.act_window,name:sale_advance_payment.action_view_account_voucher_sale_wizard
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Advance Payment"
+msgstr "Paiement anticipé"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_sale_order__advance_payment_status
+msgid "Advance Payment Status"
+msgstr "Statut du paiement anticipé"
+
+#. module: sale_advance_payment
+#: model:ir.actions.act_window,name:sale_advance_payment.action_account_advance_payments_receivables
+#: model:ir.ui.menu,name:sale_advance_payment.menu_account_advance_payments_receivables
+msgid "Advance Payments"
+msgstr "Paiements anticipés"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.sale_order_view_tree
+msgid "Amount Residual"
+msgstr "Montant résiduel"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__amount_total
+msgid "Amount Total"
+msgstr "Montant Total"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__amount_advance
+msgid "Amount advanced"
+msgstr "Montant avancé"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Amount in Order Currency"
+msgstr "Montant en devise de commande"
+
+#. module: sale_advance_payment
+#. odoo-python
+#: code:addons/sale_advance_payment/wizards/sale_advance_payment_wizard.py:0
+msgid "Amount of advance is greater than residual amount on sale order"
+msgstr "Le montant de l'avance est supérieur au montant résiduel sur la commande de vente"
+
+#. module: sale_advance_payment
+#. odoo-python
+#: code:addons/sale_advance_payment/wizards/sale_advance_payment_wizard.py:0
+msgid "Amount of advance must be positive."
+msgstr "Le montant de l'avance doit être positif."
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_res_config_settings__auto_post_sale_advance_payments
+msgid "Auto Post Sale Advance Payments"
+msgstr "Paiements anticipés après-vente automatique"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_res_config_settings__auto_reconcile_sale_advance_payments
+msgid "Auto Reconcile Sale Advance Payments"
+msgstr "Rapprochement automatique des paiements anticipés de vente"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.res_config_settings_view_form_sale
+msgid "Automatically reconcile payments upon bill confirmation."
+msgstr "Rapprocher automatiquement les paiements lors de la confirmation de la facture."
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__available_payment_method_line_ids
+msgid "Available Payment Method Line"
+msgstr "Ligne de mode de paiement disponible"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sale_advance_payment
+#: model:ir.model,name:sale_advance_payment.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__currency_amount
+msgid "Curr. amount"
+msgstr "Actuel. "
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__currency_id
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Currency"
+msgstr "Monnaie"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_payment_search
+msgid "Customer Advance Payments"
+msgstr "Acomptes clients"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__date
+msgid "Date"
+msgstr "Date"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.res_config_settings_view_form_sale
+msgid "If enabled, advance payments created from POs are automatically posted."
+msgstr "Si activé, les paiements anticipés créés à partir des bons de commande sont automatiquement comptabilisés."
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.res_config_settings_view_form_sale
+msgid "If enabled, advance payments created from POs are automatically reconciled upon bill confirmation."
+msgstr "Si activé, les paiements anticipés créés à partir des bons de commande sont automatiquement rapprochés lors de la confirmation de la facture."
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__journal_currency_id
+msgid "Journal Currency"
+msgstr "Devise du journal"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Make advance payment"
+msgstr "Effectuer un paiement anticipé"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields.selection,name:sale_advance_payment.selection__sale_order__advance_payment_status__not_paid
+msgid "Not Paid"
+msgstr "Non payé"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_payment_search
+msgid "Not Reconciled"
+msgstr "Non réconcilié"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__order_id
+msgid "Order"
+msgstr "Ordre"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_voucher_sale_wizard
+msgid "Order Due Amount"
+msgstr "Montant dû de la commande"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields.selection,name:sale_advance_payment.selection__sale_order__advance_payment_status__paid
+msgid "Paid"
+msgstr "Payé"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields.selection,name:sale_advance_payment.selection__sale_order__advance_payment_status__partial
+msgid "Partially Paid"
+msgstr "Partiellement payé"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.sale_order_form
+msgid "Pay purchase advanced"
+msgstr "Payer l'achat à l'avance"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_sale_order__account_payment_ids
+msgid "Pay sale advanced"
+msgstr "Payer la vente avancée"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__payment_method_line_id
+msgid "Payment Method"
+msgstr "Mode de paiement"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_payment_tree
+msgid "Payment Sent?"
+msgstr "Paiement envoyé ?"
+
+#. module: sale_advance_payment
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.sale_order_form
+msgid "Payment advances"
+msgstr "Avances de paiement"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_sale_order__payment_line_ids
+msgid "Payment move lines"
+msgstr "Lignes de mouvement de paiement"
+
+#. module: sale_advance_payment
+#: model:ir.model,name:sale_advance_payment.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_voucher_wizard_sale__payment_ref
+msgid "Ref."
+msgstr "Réf."
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_sale_order__amount_residual
+msgid "Residual amount"
+msgstr "Montant résiduel"
+
+#. module: sale_advance_payment
+#: model:ir.model.fields,field_description:sale_advance_payment.field_account_payment__sale_order_id
+#: model_terms:ir.ui.view,arch_db:sale_advance_payment.view_account_payment_form
+msgid "Sale Order"
+msgstr "Ordre de vente"
+
+#. module: sale_advance_payment
+#: model:ir.model,name:sale_advance_payment.model_sale_order
+msgid "Sales Order"
+msgstr "Commande client"

@@ -8,7 +8,7 @@
             <button name="action_quotation_send" position="before">
                 <button
                     name="%(action_view_account_voucher_sale_wizard)d"
-                    string="Pay purchase advanced"
+                    string="Pay sale order advanced"
                     type="action"
                     groups="account.group_account_invoice"
                     invisible="state in ['cancel'] or not amount_residual"
