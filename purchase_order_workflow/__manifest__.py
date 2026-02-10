@@ -1,25 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Purchase Order Workflow',
-    'version': '18.0.1.0.0',
-    'category': 'Inventory',
-    'summary': 'Add Workflow to purchase order generate invoice .',
-    'description': """
-        Add Workflow to purchase order generate invoice .
-    """,
-    'author': 'GetapPRO',
-    'company': 'GetapPRO',
-    'maintainer': 'GetapPRO',
-    'website': 'https://www.getap.pro',
-    'depends': ['purchase.order'],
+    'name': 'Purchase Auto Bill & Cash Payment',
+    'version': '1.0',
+    'category': 'Inventory/Purchase',
+    'summary': 'Génère automatiquement la facture fournisseur, la date et le paiement en espèces',
+    'depends': ['purchase', 'account'],
     'data': [],
-    'demo': [],
-    'external_dependencies': {
-        'python': [],
-    },
-    #'images': ['static/description/icon.png'],
-    'license': 'LGPL-3',
     'installable': True,
-    'auto_install': False,
-    'application': False,
+    'license': 'LGPL-3',
 }
